@@ -1,4 +1,7 @@
 #coding=utf-8
+#Author:windard Yang
+#Time :2016-2-4
+#Email:1106911190@qq.com
 import sys
 import copy
 from random import randint
@@ -7,6 +10,7 @@ from PyQt4 import QtGui,QtCore
 class PyQtGame(QtGui.QWidget):
 	def __init__(self):
 		super(PyQtGame,self).__init__()
+		self.setWindowIcon(QtGui.QIcon('2048.ico'))
 		self.randomInit()
 		self.colors = {
 			0:QtGui.QColor(0xcdc1b4),

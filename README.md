@@ -1,6 +1,6 @@
 #This is 2048 Game by 2048
 
-这是基于PyQt4和python2.7写的2048小游戏P
+这是基于PyQt4和python2.7写的2048小游戏
 
 实现的功能：
 
@@ -20,5 +20,10 @@
 
 游戏截图：
 
+Windows:
+
+![2048Game](2048Game_window.png)
+
+Ubuntu:
 
 ![2048Game](2048Game.png)
