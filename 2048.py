@@ -1,441 +1,320 @@
 #coding=utf-8
 import sys
-from PyQt4 import QtGui,QtCore
+import copy
 from random import randint
+from PyQt4 import QtGui,QtCore
 
-class Example(QtGui.QWidget):
-    def __init__(self):
-        super(Example,self).__init__()
-        self.tiles = [[0]*4 for i in range(4)]
-        self.colors = {
-            0:QtGui.QColor(0xcdc1b4),
-            2:QtGui.QColor(0xeee4da),
-            4:QtGui.QColor(0xede0c8),
-            8:QtGui.QColor(0xf2b179),
-            16:QtGui.QColor(0xf59563),
-            32:QtGui.QColor(0xf67c5f),
-            64:QtGui.QColor(0xf65e3b),
-            128:QtGui.QColor(0xedcf72),
-            256:QtGui.QColor(0xedcc61),
-            512:QtGui.QColor(0xedc850),
-            1024:QtGui.QColor(0xedc53f),
-            2048:QtGui.QColor(0xedc22e),
-        }
-        for m in range(randint(2,3)):
-            i = randint(0,3)
-            j = randint(0,3)
-            self.tiles[i][j] = 2
-        self.color = [255,80,160]        
-        self.initUI()
+class PyQtGame(QtGui.QWidget):
+	def __init__(self):
+		super(PyQtGame,self).__init__()
+		self.randomInit()
+		self.colors = {
+			0:QtGui.QColor(0xcdc1b4),
+			2:QtGui.QColor(0xeee4da),
+			4:QtGui.QColor(0xede0c8),
+			8:QtGui.QColor(0xf2b179),
+			16:QtGui.QColor(0xf59563),
+			32:QtGui.QColor(0xf67c5f),
+			64:QtGui.QColor(0xf65e3b),
+			128:QtGui.QColor(0xedcf72),
+			256:QtGui.QColor(0xedcc61),
+			512:QtGui.QColor(0xedc850),
+			1024:QtGui.QColor(0xedc53f),
+			2048:QtGui.QColor(0xedc22e),
+		}
+		self.best = 0
+		self.initUI()
 
-    def initUI(self):
-        self.setGeometry(300,300,350,350)
-        self.setWindowTitle("Draw Reac")
-        self.show()
+	def randomInit(self):
+		self.tiles = [[0]*4 for i in range(4)]
+		for m in range(randint(2,3)):
+			self.createColor(4)
+		self.score = 0
+		self.overed = 0			
 
-    def paintEvent(self,e):
-        qp = QtGui.QPainter()
-        qp.begin(self)
-        self.drawRectangles(qp)
-        qp.end()
-    
-    def keyPressEvent(self,e):
-        if e.key() == QtCore.Qt.Key_Escape:
-            self.close()
-        elif e.key() == QtCore.Qt.Key_Up:
-            self.Up()
-        elif e.key() == QtCore.Qt.Key_Down:
-            self.Down()
-        elif e.key() == QtCore.Qt.Key_Left:
-            self.Left()
-        elif e.key() == QtCore.Qt.Key_Right:
-            self.Right()
+	def randomColor(self,rate):
+		i = randint(0,rate)
+		return 2 if i<rate else 4
 
-    def Left(self):
-        print self.tiles
-        # self.colToTop('j')
-        isChanged = 1
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                if self.tiles[i][j]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = j
-                        firstNumValue = self.tiles[i][j]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[i][j]
-                        self.tiles[i][firstZeroLocation] = firstNumValue
-                        self.tiles[i][j] =0
-                        firstZeroLocation +=1                 
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[i][j] == firstNumValue:
-                            firstNumValue*=2
-                            isChanged = 1
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][j]=0
-                            firstNumLocation = -1
-                        else:
-                            firstNumLocation+=1
-                            firstNumValue = self.tiles[i][j]
-                            self.tiles[i][firstNumLocation]=firstNumValue
-                            self.tiles[i][j]=0                        
-                            firstZeroLocation+=1
-                    else:
-                        if self.tiles[i][j] == firstNumValue:
-                            firstNumValue*=2
-                            isChanged = 1
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][j]=0
-                            firstZeroLocation=firstNumLocation+1
-                            firstNumLocation = -1
-                        else:
-                            firstNumLocation+=1
-                            firstNumValue = self.tiles[i][j]  
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = j      
-        # self.color = [180,70,100]
-        if isChanged:
-            while 1:
-                i = randint(0,3)
-                j = randint(0,3)
-                if self.tiles[i][j]==0:
-                    print i,j
-                    self.tiles[i][j]=2
-                    break
-                else:
-                    pass
-        self.update()
-        print self.tiles
+	def createColor(self,num):
+		while 1:
+			i = randint(0,3)
+			j = randint(0,3)
+			if self.tiles[i][j]==0 :
+				self.tiles[i][j] = self.randomColor(num)
+				break
+			else:
+				continue
 
-    def Up(self):
-        print self.tiles
-        # self.rowToTop('j')
-        isChanged = 1
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                # exec 'bigEnd='+temp
-                if self.tiles[j][i]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = j
-                        firstNumValue = self.tiles[j][i]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[j][i]
-                        self.tiles[firstZeroLocation][i] = firstNumValue
-                        self.tiles[j][i] =0
-                        # self.inOrDe(temp,firstZeroLocation)         
-                        firstZeroLocation+=1
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[j][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[j][i]=0
-                            firstNumLocation = -1
-                        else:
-                            # self.inOrDe(temp,firstNumLocation)
-                            firstNumLocation+=1
-                            firstNumValue = self.tiles[j][i]
-                            self.tiles[firstNumLocation][i]=firstNumValue
-                            self.tiles[j][i]=0                        
-                            # self.inOrDe(temp,firstZeroLocation)
-                            firstZeroLocation+=1
-                    else:
-                        if self.tiles[j][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[j][i]=0
-                            firstNumLocation = -1
-                            if self.isj(temp):
-                                firstZeroLocation=firstNumLocation-1
-                            else:
-                                firstZeroLocation=firstNumLocation+1
-                        else:
-                            self.inOrDe(temp,firstNumLocation)
-                            firstNumValue = self.tiles[j][i] 
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = j                       
-        # self.color = [0,34,189]
-        if isChanged:
-            while 1:
-                i = randint(0,3)
-                j = randint(0,3)
-                if self.tiles[i][j]==0:
-                    print i,j
-                    self.tiles[i][j]=2
-                    break
-                else:
-                    pass    
-        self.update()
-        print self.tiles
+	def isFull(self):
+		for i in range(3):
+			if 0 in self.tiles[i]:
+				return 0
+				break
+		else:
+			return 1
 
-    def Down(self):
-        print self.tiles
-        # self.rowToTop('3-j')
-        temp = '3-j'
-        isChanged = 1
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                # exec 'bigEnd='+temp
-                if self.tiles[3-j][i]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = 3-j
-                        firstNumValue = self.tiles[3-j][i]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[3-j][i]
-                        self.tiles[firstZeroLocation][i] = firstNumValue
-                        self.tiles[3-j][i] =0
-                        self.inOrDe(temp,firstZeroLocation)         
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[3-j][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[3-j][i]=0
-                            firstNumLocation = -1
-                        else:
-                            # self.inOrDe(temp,firstNumLocation)
-                            firstNumLocation-=1
-                            firstNumValue = self.tiles[3-j][i]
-                            self.tiles[firstNumLocation][i]=firstNumValue
-                            self.tiles[3-j][i]=0                        
-                            # self.inOrDe(temp,firstZeroLocation)
-                            firstZeroLocation-=1
-                    else:
-                        if self.tiles[3-j][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            print firstNumValue
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[3-j][i]=0
-                            if self.isBigEnd(temp):
-                                firstZeroLocation=firstNumLocation-1
-                            else:
-                                firstZeroLocation=firstNumLocation+1
-                            firstNumLocation = -1  
-                        else:
-                            # self.inOrDe(temp,firstNumLocation)
-                            firstNumLocation = firstNumLocation-1
-                            firstNumValue = self.tiles[3-j][i] 
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = 3-j               
-        # self.color = [100,200,150]
-        if isChanged:
-            while 1:
-                i = randint(0,3)
-                j = randint(0,3)
-                if self.tiles[i][j]==0:
-                    print i,j
-                    self.tiles[i][j]=2
-                    break
-                else:
-                    pass   
-        self.update()
-        print self.tiles
+	def isOverd(self):
+		self.rowOvre = 0
+		self.colOver = 0
+		self.colMove('right',False)
+		self.rowMove('down',False)
+		if self.rowOvre and self.colOver and self.isFull() :
+			self.gameOver()
+		if self.score>self.best :
+			self.best = self.score
 
-    def isBigEnd(self,temp):
-            return 1 if temp=='3-j' else 0
+	def initUI(self):
+		self.resize(350,400)
+		self.center()
+		self.setWindowTitle("2048 Game")
+		self.show()
 
-    def inOrDe(self,temp,item):
-        if self.isBigEnd(temp):
-            item -=1                 
-        else:   
-            item +=1      
+	def center(self):
+		qr = self.frameGeometry()
+		cp = QtGui.QDesktopWidget().availableGeometry().center()
+		qr.moveCenter(cp)
+		self.move(qr.topLeft())
 
-    def isChanged(self,temp):
-        pass
+	def keyPressEvent(self,e):
+		if e.key() == QtCore.Qt.Key_Escape:
+			self.resetGame()
+		elif e.key() == QtCore.Qt.Key_Up:
+			self.rowMove('up',True)
+		elif e.key() == QtCore.Qt.Key_Down:
+			self.rowMove('down',True)
+		elif e.key() == QtCore.Qt.Key_Left:
+			self.colMove('left',True)
+		elif e.key() == QtCore.Qt.Key_Right:
+			self.colMove('right',True)
+		self.isOverd()
+	
+	def resetGame(self):
+		self.randomInit()
+		self.update()
 
-    def rowToTop(self,temp):
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                exec 'bigEnd='+temp
-                if self.tiles[bigEnd][i]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = bigEnd
-                        firstNumValue = self.tiles[bigEnd][i]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[bigEnd][i]
-                        self.tiles[firstZeroLocation][i] = firstNumValue
-                        self.tiles[bigEnd][i] =0
-                        self.inOrDe(temp,firstZeroLocation)         
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[bigEnd][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[bigEnd][i]=0
-                        else:
-                            self.inOrDe(temp,firstNumLocation)
-                            firstNumValue = self.tiles[bigEnd][i]
-                            self.tiles[firstNumLocation][i]=firstNumValue
-                            self.tiles[bigEnd][i]=0                        
-                            self.inOrDe(temp,firstZeroLocation)
-                    else:
-                        if self.tiles[bigEnd][i] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            self.tiles[firstNumLocation][i] = firstNumValue
-                            self.tiles[bigEnd][i]=0
-                            if self.isBigEnd(temp):
-                                firstZeroLocation=firstNumLocation-1
-                            else:
-                                firstZeroLocation=firstNumLocation+1
-                        else:
-                            self.inOrDe(temp,firstNumLocation)
-                            firstNumValue = self.tiles[bigEnd][i] 
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = bigEnd       
+	def mousePressEvent(self,e):
+		self.lastPoint=e.pos()
 
-    def colToTop(self,temp):
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                exec 'bigEnd='+temp
-                if self.tiles[i][bigEnd]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = bigEnd
-                        firstNumValue = self.tiles[i][bigEnd]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[i][bigEnd]
-                        self.tiles[i][firstZeroLocation] = firstNumValue
-                        self.tiles[i][bigEnd] =0
-                        self.inOrDe(temp,firstZeroLocation)         
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[i][bigEnd] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][bigEnd]=0
-                        else:
-                            self.inOrDe(temp,firstNumLocation)
-                            firstNumValue = self.tiles[i][bigEnd]
-                            self.tiles[i][firstNumLocation]=firstNumValue
-                            self.tiles[i][bigEnd]=0                        
-                            self.inOrDe(temp,firstZeroLocation)
-                    else:
-                        if self.tiles[i][bigEnd] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][bigEnd]=0
-                            if self.isBigEnd(temp):
-                                firstZeroLocation=firstNumLocation-1
-                            else:
-                                firstZeroLocation=firstNumLocation+1
-                        else:
-                            self.inOrDe(temp,firstNumLocation)
-                            firstNumValue = self.tiles[i][bigEnd] 
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = bigEnd       
+	def mouseReleaseEvent(self,e):
+		self.resetRect = QtCore.QRect(240,15,80,60)
+		if self.resetRect.contains(e.pos().x(),e.pos().y()) and self.resetRect.contains(self.lastPoint.x(),self.lastPoint.y()):
+			if QtGui.QMessageBox.question(self,'Message',"Are You Sure To Reset ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.No)==QtGui.QMessageBox.Yes:
+				self.randomInit()
+		else :
+			dx = e.pos().x()-self.lastPoint.x()
+			dy = e.pos().y()-self.lastPoint.y()
+			if abs(dx)>abs(dy) and abs(dx)>10:
+				if dx>0:
+					self.colMove('right',True)
+				else:
+					self.colMove('left',True)
+			elif abs(dy)>10:
+				if dy>0:
+					self.rowMove('down',True)
+				else:
+					self.rowMove('up',True)		
 
-    def Right(self):
-        print self.tiles
-        # self.colToTop('3-j')
-        isChanged = 1
-        for i in range(4):
-            firstNumLocation = -1
-            firstZeroLocation = -1
-            for j in range(4):
-                if self.tiles[i][3-j]!=0:
-                    if firstNumLocation==-1 and firstZeroLocation==-1:
-                        firstNumLocation = 3-j
-                        firstNumValue = self.tiles[i][3-j]
-                    elif firstNumLocation==-1 and firstZeroLocation!=-1:
-                        firstNumLocation = firstZeroLocation
-                        firstNumValue = self.tiles[i][3-j]
-                        self.tiles[i][firstZeroLocation] = firstNumValue
-                        self.tiles[i][3-j] =0
-                        firstZeroLocation -=1                 
-                    elif firstNumLocation!=-1 and firstZeroLocation!=-1:
-                        if self.tiles[i][3-j] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][3-j]=0
-                            firstNumLocation = -1
-                        else:
-                            firstNumLocation-=1
-                            firstNumValue = self.tiles[i][3-j]
-                            self.tiles[i][firstNumLocation]=firstNumValue
-                            self.tiles[i][3-j]=0                        
-                            firstZeroLocation-=1
-                    else:
-                        if self.tiles[i][3-j] == firstNumValue:
-                            firstNumValue=firstNumValue*2
-                            isChanged = 1
-                            self.tiles[i][firstNumLocation] = firstNumValue
-                            self.tiles[i][3-j]=0
-                            firstZeroLocation=firstNumLocation-1
-                            firstNumLocation = -1
-                        else:
-                            firstNumLocation-=1
-                            firstNumValue = self.tiles[i][3-j]
-                else:
-                    if firstZeroLocation == -1:
-                        firstZeroLocation = 3-j
-        # self.color = [249,189,120]
-        if isChanged:
-            while 1:
-                i = randint(0,3)
-                j = randint(0,3)
-                if self.tiles[i][j]==0:
-                    print i,j
-                    self.tiles[i][j]=2
-                    break
-                else:
-                    pass       
-        self.update()
-        print self.tiles
+	def rowMove(self,direction,temp):
+		prevTile = copy.deepcopy(self.tiles)
+		for i in range(4):
+			firstNumLocation = -1
+			firstZeroLocation = -1
+			for j in range(4):
+				if direction == 'down':
+					bigEnd = 3-j
+				else:
+					bigEnd = j			
+				if self.tiles[bigEnd][i]!=0:
+					if firstNumLocation==-1 and firstZeroLocation==-1:
+						firstNumLocation = bigEnd
+						firstNumValue = self.tiles[bigEnd][i]
+					elif firstNumLocation==-1 and firstZeroLocation!=-1:
+						firstNumLocation = firstZeroLocation
+						firstNumValue = self.tiles[bigEnd][i]
+						self.tiles[firstZeroLocation][i] = firstNumValue
+						self.tiles[bigEnd][i] =0
+						if direction=='down' :
+							firstZeroLocation -=1
+						else :
+							firstZeroLocation+=1
+					elif firstNumLocation!=-1 and firstZeroLocation!=-1:
+						if self.tiles[bigEnd][i] == firstNumValue:
+							firstNumValue*=2
+							if temp:
+								self.score+=firstNumValue
+							self.tiles[firstNumLocation][i] = firstNumValue
+							self.tiles[bigEnd][i]=0
+							firstNumLocation = -1	
+						else :
+							if direction == 'down' :
+								firstNumLocation-=1
+							else :
+								firstNumLocation+=1
+							firstNumValue = self.tiles[bigEnd][i]
+							self.tiles[firstNumLocation][i]=firstNumValue
+							self.tiles[bigEnd][i]=0       
+							if direction =='down' :
+								firstZeroLocation-=1		
+							else :
+								firstZeroLocation+=1
+					else:
+						if self.tiles[bigEnd][i] == firstNumValue:
+							firstNumValue*=2
+							if temp:
+								self.score+=firstNumValue
+							self.tiles[firstNumLocation][i] = firstNumValue
+							self.tiles[bigEnd][i]=0
+							if direction == 'down' :
+								firstZeroLocation = firstNumLocation-1
+							else :
+								firstZeroLocation = firstNumLocation+1
+							firstNumLocation = -1
+						else :
+							if direction == 'down' :
+								firstNumLocation-=1
+							else :
+								firstNumLocation+=1
+							firstNumValue = self.tiles[bigEnd][i]														
+					pass
+				else:
+					if firstZeroLocation ==-1:
+						firstZeroLocation = bigEnd
+		if temp :
+			if prevTile != self.tiles and not self.isFull():
+				self.createColor(9)
+			self.update()
+		else :
+			if prevTile == self.tiles :
+				self.rowOvre = 1
+			self.tiles = copy.deepcopy(prevTile)
 
-    def PaintRect(self,e):
-        qp = QtGui.QPainter()
-        qp.begin(self)
-        color = QtGui.QColor(10,40,60,100)
-        qp.setPen(color)
-        qp.setBrush(QtGui.QColor(14,145,218,160))
-        qp.drawRect(20,20,100,100)
-        qp.end()
+	def colMove(self,direction,temp):
+		prevTile = copy.deepcopy(self.tiles)
+		for i in range(4):
+			firstNumLocation = -1
+			firstZeroLocation = -1
+			for j in range(4):
+				if direction == 'right':
+					bigEnd = 3-j
+				else:
+					bigEnd = j			
+				if self.tiles[i][bigEnd]!=0:
+					if firstNumLocation==-1 and firstZeroLocation==-1:
+						firstNumLocation = bigEnd
+						firstNumValue = self.tiles[i][bigEnd]
+					elif firstNumLocation==-1 and firstZeroLocation!=-1:
+						firstNumLocation = firstZeroLocation
+						firstNumValue = self.tiles[i][bigEnd]
+						self.tiles[i][firstZeroLocation] = firstNumValue
+						self.tiles[i][bigEnd] =0
+						if direction=='right' :
+							firstZeroLocation -=1
+						else :
+							firstZeroLocation+=1
+					elif firstNumLocation!=-1 and firstZeroLocation!=-1:
+						if self.tiles[i][bigEnd] == firstNumValue:
+							firstNumValue*=2
+							if temp:
+								self.score+=firstNumValue
+							self.tiles[i][firstNumLocation] = firstNumValue
+							self.tiles[i][bigEnd]=0
+							firstNumLocation = -1	
+						else :
+							if direction == 'right' :
+								firstNumLocation-=1
+							else :
+								firstNumLocation+=1
+							firstNumValue = self.tiles[i][bigEnd]
+							self.tiles[i][firstNumLocation]=firstNumValue
+							self.tiles[i][bigEnd]=0       
+							if direction =='right' :
+								firstZeroLocation-=1		
+							else :
+								firstZeroLocation+=1
+					else:
+						if self.tiles[i][bigEnd] == firstNumValue:
+							firstNumValue*=2
+							if temp:
+								self.score+=firstNumValue
+							self.tiles[i][firstNumLocation] = firstNumValue
+							self.tiles[i][bigEnd]=0
+							if direction == 'right' :
+								firstZeroLocation = firstNumLocation-1
+							else :
+								firstZeroLocation = firstNumLocation+1
+							firstNumLocation = -1
+						else :
+							if direction == 'right' :
+								firstNumLocation-=1
+							else :
+								firstNumLocation+=1
+							firstNumValue = self.tiles[i][bigEnd]															
+					pass
+				else:
+					if firstZeroLocation ==-1:
+						firstZeroLocation = bigEnd
+		if temp :
+			if prevTile != self.tiles and not self.isFull():
+				self.createColor(9)
+			self.update()
+		else :
+			if prevTile == self.tiles :
+				self.colOver = 1
+			self.tiles=copy.deepcopy(prevTile)
+				
+	def paintEvent(self,e):
+		painter = QtGui.QPainter(self)
+		painter.setPen(QtCore.Qt.NoPen)
+		painter.setBrush(QtGui.QBrush(QtGui.QColor(0xbbada0)))
+		painter.drawRect(self.rect())
+		painter.setBrush(QtGui.QBrush(QtGui.QColor(0x776e65)))
+		painter.drawRoundedRect(QtCore.QRect(20,15,80,60),5,5)
+		painter.setFont(QtGui.QFont("Arial",12))
+		painter.setPen(QtGui.QColor(0xcdc1b4))		
+		painter.drawText(QtCore.QRectF(QtCore.QRect(20,20,80,60)),"SCORE",QtGui.QTextOption(QtCore.Qt.AlignHCenter))
+		painter.setFont(QtGui.QFont("Arial",18))
+		painter.setPen(QtGui.QColor(255,255,255))	
+		painter.drawText(QtCore.QRectF(QtCore.QRect(20,15,80,55)),str(self.score),QtGui.QTextOption(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom))
+		painter.setPen(QtCore.Qt.NoPen)
+		painter.drawRoundedRect(QtCore.QRect(130,15,80,60),5,5)
+		painter.setFont(QtGui.QFont("Arial",12))
+		painter.setPen(QtGui.QColor(0xcdc1b4))			
+		painter.drawText(QtCore.QRectF(QtCore.QRect(130,20,80,60)),"BEST",QtGui.QTextOption(QtCore.Qt.AlignHCenter))
+		painter.setFont(QtGui.QFont("Arial",18))
+		painter.setPen(QtGui.QColor(255,255,255))	
+		painter.drawText(QtCore.QRectF(QtCore.QRect(130,15,80,55)),str(self.best),QtGui.QTextOption(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom))
+		painter.setPen(QtCore.Qt.NoPen)
+		painter.drawRoundedRect(QtCore.QRect(240,15,80,60),5,5)
+		painter.setFont(QtGui.QFont("Arial",16))
+		painter.setPen(QtGui.QColor(255,255,255))			
+		painter.drawText(QtCore.QRectF(QtCore.QRect(240,15,80,60)),"RESET",QtGui.QTextOption(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter))
+		painter.setPen(QtCore.Qt.NoPen)
+		self.drawRectangles(painter)
+
+	def drawRectangles(self,painter):
+		for i in range(4):
+			for j in range(4):
+				painter.setFont(QtGui.QFont("Arial",20,10))
+				painter.setBrush(self.colors[self.tiles[i][j]])
+				painter.drawRoundedRect(QtCore.QRect(20+j*80,90+i*80,60,60),10,10)
+				if self.tiles[i][j] != 0:
+					if self.tiles[i][j]<15:
+						painter.setPen(QtGui.QColor(100,100,100))
+					else :
+						painter.setPen(QtGui.QColor(255,255,255))
+					painter.drawText(QtCore.QRectF(QtCore.QRect(20+j*80,90+i*80,60,60)),str(self.tiles[i][j]),QtGui.QTextOption(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter))
+					painter.setPen(QtCore.Qt.NoPen)
+
+	def gameOver(self):
+		if QtGui.QMessageBox.question(self,'Message',"Do You Want To Restart ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.Yes)==QtGui.QMessageBox.Yes:
+			self.randomInit()
+		else:
+			self.close()
+
+if __name__ == '__main__':
+	app = QtGui.QApplication(sys.argv)
+	game = PyQtGame()
+	app.exec_()
 
 
-    def drawRectangles(self,qp):
-        color = QtGui.QColor(10,40,70)
-        color.setNamedColor("#d4d4d4")
-        qp.setPen(color)
-
-        for i in range(4):
-            for j in range(4):
-                # qp.setPen(QtGui.QPen(QtGui.QColor(0x776e65)))
-                qp.setFont(QtGui.QFont('Arial',20))
-                if self.tiles[i][j] != 0:
-                    qp.setBrush(self.colors[self.tiles[i][j]])
-                    qp.drawRoundedRect(QtCore.QRect(20+j*80,20+i*80,60,60),10,10)
-                    color = QtGui.QColor(255,255,255)
-                    qp.setPen(color)
-                    qp.drawText(QtCore.QRectF(QtCore.QRect(20+j*80,20+i*80,60,60)),str(self.tiles[i][j]),QtGui.QTextOption(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter))
-                else:
-                    qp.setBrush(self.colors[self.tiles[i][j]])
-                    qp.drawRoundedRect(QtCore.QRect(20+j*80,20+i*80,60,60),10,10)
-        qp.setBrush(QtGui.QColor(25,0,90,20))
-        qp.drawRect(10,10,330,330)
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
-
-if __name__=='__main__':
-    main()
