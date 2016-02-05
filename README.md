@@ -43,3 +43,7 @@ Ubuntu:
 Windows：
 
 ![greedSnake_window](greedSnake_window.png)
+
+Ubuntu：
+
+![Greed Snake](Greed Snake.png)
