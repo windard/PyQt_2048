@@ -69,7 +69,7 @@ class PyQtGame(QtGui.QWidget):
 			self.best = self.score
 
 	def initUI(self):
-		self.resize(350,400)
+		self.setFixedSize(350,400)
 		self.center()
 		self.setWindowTitle("2048 Game")
 		self.show()

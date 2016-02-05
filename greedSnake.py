@@ -10,6 +10,7 @@ from PyQt4 import QtGui,QtCore
 class Game(QtGui.QWidget):
 	def __init__(self):
 		super(Game,self).__init__()
+		self.setWindowIcon(QtGui.QIcon('snake.jpg'))
 		self.timer = QtCore.QTimer(self)
 		self.difficult = 300
 		self.timer.setInterval(self.difficult)
@@ -20,7 +21,7 @@ class Game(QtGui.QWidget):
 		self.initUI()
 
 	def initUI(self):
-		self.resize(350,400)
+		self.setFixedSize(350,400)
 		self.center()
 		cb = QtGui.QCheckBox('Cross Walk', self)
 		cb.move(30, 20)
