@@ -27,3 +27,19 @@ Windows:
 Ubuntu:
 
 ![2048Game](2048Game.png)
+
+
+还有一个基于PyQt4和Python2.7的贪吃蛇小游戏
+
+实现的功能：
+
+1. 空格键(Space)开始，确认(Enter)键暂停，退出(Escape)键重新开始
+
+2. 自定义是否可以穿墙和游戏难度，游戏难度从1到100
+
+
+游戏截图：
+
+Windows：
+
+![greedSnake_window](greedSnake_window.png)

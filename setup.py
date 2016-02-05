@@ -14,13 +14,13 @@ py2exe_options = {
         "ascii": 0,
         "bundle_files": 1,
         }
- 
+
 setup(
-      name = '2048 Game',
+      name = 'Greed Snake',
       version = '1.0',
       author  = 'Windard Yang',
       author_email = '1106911190@qq.com',
-      windows = [{'script':'2048.py','icon_resources': [(0, '2048.ico')],}], 
+      windows = [{'script':'greedSnake.py','icon_resources': [(1, 'snake.ico')],}], 
       zipfile = None,
       options = {'py2exe': py2exe_options}
       )

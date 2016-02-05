@@ -10,7 +10,8 @@ from PyQt4 import QtGui,QtCore
 class Game(QtGui.QWidget):
 	def __init__(self):
 		super(Game,self).__init__()
-		self.setWindowIcon(QtGui.QIcon('snake.jpg'))
+		self.setWindowTitle("Greed Snake")
+		self.setWindowIcon(QtGui.QIcon('snake.ico'))
 		self.timer = QtCore.QTimer(self)
 		self.difficult = 300
 		self.timer.setInterval(self.difficult)
