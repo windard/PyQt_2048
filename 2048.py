@@ -311,7 +311,7 @@ class PyQtGame(QtGui.QWidget):
 					painter.setPen(QtCore.Qt.NoPen)
 
 	def gameOver(self):
-		if QtGui.QMessageBox.question(self,'Message',"Do You Want To Restart ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.Yes)==QtGui.QMessageBox.Yes:
+		if QtGui.QMessageBox.question(self,'Message',"<center><b>Game Over</b></center> <br> Do You Want To Restart ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.Yes)==QtGui.QMessageBox.Yes:
 			self.randomInit()
 		else:
 			self.close()
