@@ -59,17 +59,17 @@ class PyQtGame(QtGui.QWidget):
 			return 1
 
 	def isOverd(self):
-		self.rowOvre = 0
+		self.rowOver = 0
 		self.colOver = 0
 		self.colMove('right',False)
 		self.rowMove('down',False)
-		if self.rowOvre and self.colOver and self.isFull() :
+		if self.rowOver and self.colOver and self.isFull() :
 			self.gameOver()
 		if self.score>self.best :
 			self.best = self.score
 
 	def initUI(self):
-		self.resize(350,400)
+		self.setFixedSize(350,400)
 		self.center()
 		self.setWindowTitle("2048 Game")
 		self.show()
@@ -180,7 +180,6 @@ class PyQtGame(QtGui.QWidget):
 							else :
 								firstNumLocation+=1
 							firstNumValue = self.tiles[bigEnd][i]														
-					pass
 				else:
 					if firstZeroLocation ==-1:
 						firstZeroLocation = bigEnd
@@ -190,7 +189,7 @@ class PyQtGame(QtGui.QWidget):
 			self.update()
 		else :
 			if prevTile == self.tiles :
-				self.rowOvre = 1
+				self.rowOver = 1
 			self.tiles = copy.deepcopy(prevTile)
 
 	def colMove(self,direction,temp):
@@ -254,7 +253,6 @@ class PyQtGame(QtGui.QWidget):
 							else :
 								firstNumLocation+=1
 							firstNumValue = self.tiles[i][bigEnd]															
-					pass
 				else:
 					if firstZeroLocation ==-1:
 						firstZeroLocation = bigEnd
@@ -311,7 +309,7 @@ class PyQtGame(QtGui.QWidget):
 					painter.setPen(QtCore.Qt.NoPen)
 
 	def gameOver(self):
-		if QtGui.QMessageBox.question(self,'Message',"Do You Want To Restart ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.Yes)==QtGui.QMessageBox.Yes:
+		if QtGui.QMessageBox.question(self,'Message',"<center><b>Game Over</b></center> <br> Do You Want To Restart ?",QtGui.QMessageBox.Yes|QtGui.QMessageBox.No,QtGui.QMessageBox.Yes)==QtGui.QMessageBox.Yes:
 			self.randomInit()
 		else:
 			self.close()

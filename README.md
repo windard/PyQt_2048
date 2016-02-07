@@ -29,7 +29,7 @@ Ubuntu:
 ![2048Game](2048Game.png)
 
 
-还有一个基于PyQt4和Python2.7的贪吃蛇小游戏
+基于PyQt4和Python2.7的贪吃蛇小游戏
 
 实现的功能：
 
@@ -47,3 +47,17 @@ Windows：
 Ubuntu：
 
 ![Greed Snake](Greed Snake.png)
+
+基于java1.8 和swing的2048小游戏
+
+实现的功能：
+
+1. 按Escape键重新开始
+
+游戏截图：
+
+Windows：
+
+Ubuntu：
+
+![2048Game_JAVA](2048Game_JAVA.png)

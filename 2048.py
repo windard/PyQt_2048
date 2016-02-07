@@ -59,11 +59,11 @@ class PyQtGame(QtGui.QWidget):
 			return 1
 
 	def isOverd(self):
-		self.rowOvre = 0
+		self.rowOver = 0
 		self.colOver = 0
 		self.colMove('right',False)
 		self.rowMove('down',False)
-		if self.rowOvre and self.colOver and self.isFull() :
+		if self.rowOver and self.colOver and self.isFull() :
 			self.gameOver()
 		if self.score>self.best :
 			self.best = self.score
@@ -180,7 +180,6 @@ class PyQtGame(QtGui.QWidget):
 							else :
 								firstNumLocation+=1
 							firstNumValue = self.tiles[bigEnd][i]														
-					pass
 				else:
 					if firstZeroLocation ==-1:
 						firstZeroLocation = bigEnd
@@ -190,7 +189,7 @@ class PyQtGame(QtGui.QWidget):
 			self.update()
 		else :
 			if prevTile == self.tiles :
-				self.rowOvre = 1
+				self.rowOver = 1
 			self.tiles = copy.deepcopy(prevTile)
 
 	def colMove(self,direction,temp):
@@ -254,7 +253,6 @@ class PyQtGame(QtGui.QWidget):
 							else :
 								firstNumLocation+=1
 							firstNumValue = self.tiles[i][bigEnd]															
-					pass
 				else:
 					if firstZeroLocation ==-1:
 						firstZeroLocation = bigEnd
