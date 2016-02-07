@@ -58,6 +58,8 @@ Ubuntu：
 
 Windows：
 
+![2048Game_JAVA_windows](2048Game_JAVA_windows.png)
+
 Ubuntu：
 
 ![2048Game_JAVA](2048Game_JAVA.png)
