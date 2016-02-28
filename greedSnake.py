@@ -17,14 +17,14 @@ class Game(QtGui.QWidget):
 		self.timer.setInterval(self.difficult)
 		self.connect(self.timer,QtCore.SIGNAL('timeout()'),self.gameMove)
 		self.gameInit()
-		self.canCrossWalk = 0
+		self.canCrossWall = 0
 		self.value = 1
 		self.initUI()
 
 	def initUI(self):
 		self.setFixedSize(350,400)
 		self.center()
-		cb = QtGui.QCheckBox('Cross Walk', self)
+		cb = QtGui.QCheckBox('Cross Wall', self)
 		cb.move(30, 20)
 		cb.toggle()
 		cb.setCheckState(False)
@@ -64,7 +64,7 @@ class Game(QtGui.QWidget):
 		self.timer.setInterval(self.difficult)
 
 	def changeState(self):
-		self.canCrossWalk =0 if self.canCrossWalk else 1
+		self.canCrossWall =0 if self.canCrossWall else 1
 
 	def center(self):
 		qr = self.frameGeometry()
@@ -103,22 +103,22 @@ class Game(QtGui.QWidget):
 	def gameMove(self):
 		head = self.location[-1]
 		if self.direction == 0 :
-			if self.canCrossWalk:
+			if self.canCrossWall:
 				self.location.append([(head[0]+1)%20,head[1]])
 			else :
 				self.location.append([head[0]+1,head[1]])
 		elif self.direction == 1:
-			if self.canCrossWalk:
+			if self.canCrossWall:
 				self.location.append([head[0],(head[1]-1)%20])
 			else :
 				self.location.append([head[0],head[1]-1])
 		elif self.direction == 2 :
-			if self.canCrossWalk:
+			if self.canCrossWall:
 				self.location.append([(head[0]-1)%20,head[1]])
 			else :
 				self.location.append([head[0]-1,head[1]])
 		else :
-			if self.canCrossWalk:
+			if self.canCrossWall:
 				self.location.append([head[0],(head[1]+1)%20])
 			else:
 				self.location.append([head[0],head[1]+1])
