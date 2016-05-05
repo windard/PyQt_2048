@@ -1,4 +1,4 @@
-#This is 2048 Game by 2048
+#This is 2048 Game by PyQt4
 
 这是基于PyQt4和python2.7写的2048小游戏
 
