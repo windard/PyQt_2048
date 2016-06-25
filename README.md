@@ -22,11 +22,11 @@
 
 Windows:
 
-![2048Game](2048Game_window.png)
+![2048Game](2048/2048Game_window.png)
 
 Ubuntu:
 
-![2048Game](2048Game.png)
+![2048Game](2048/2048Game.png)
 
 
 基于PyQt4和Python2.7的贪吃蛇小游戏
@@ -42,11 +42,11 @@ Ubuntu:
 
 Windows：
 
-![greedSnake_window](greedSnake_window.png)
+![greedSnake_window](greedSnake/greedSnake_window.png)
 
 Ubuntu：
 
-![Greed Snake](Greed Snake.png)
+![Greed Snake](greedSnake/Greed Snake.png)
 
 基于java1.8 和swing的2048小游戏
 
@@ -58,8 +58,8 @@ Ubuntu：
 
 Windows：
 
-![2048Game_JAVA_windows](2048Game_JAVA_windows.png)
+![2048Game_JAVA_windows](2048/2048Game_JAVA_windows.png)
 
 Ubuntu：
 
-![2048Game_JAVA](2048Game_JAVA.png)
+![2048Game_JAVA](2048/2048Game_JAVA.png)

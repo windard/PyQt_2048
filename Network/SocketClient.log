@@ -1,0 +1,137 @@
+Socket Logging 2016 6月26 日 00:37:18 INFO     255  Socket Is Start 127.0.0.1:8090 ... 
+Socket Logging 2016 6月26 日 00:37:56 INFO     111  Change BoxSize To : 3
+Socket Logging 2016 6月26 日 00:38:31 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:31 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:31 INFO     283  Received From client : 0000h 
+Socket Logging 2016 6月26 日 00:38:31 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:31 INFO     296  All Received h
+Socket Logging 2016 6月26 日 00:38:32 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:32 INFO     302  Send 0001
+Socket Logging 2016 6月26 日 00:38:32 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:32 INFO     283  Received From client : 0001e 
+Socket Logging 2016 6月26 日 00:38:32 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:32 INFO     296  All Received he
+Socket Logging 2016 6月26 日 00:38:33 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:33 INFO     302  Send 0010
+Socket Logging 2016 6月26 日 00:38:33 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:33 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:33 INFO     283  Received From client : 0010l 
+Socket Logging 2016 6月26 日 00:38:33 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:33 INFO     296  All Received hel
+Socket Logging 2016 6月26 日 00:38:33 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:33 INFO     302  Send 0011
+Socket Logging 2016 6月26 日 00:38:33 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:33 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:33 INFO     283  Received From client : 0011l 
+Socket Logging 2016 6月26 日 00:38:33 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:33 INFO     296  All Received hell
+Socket Logging 2016 6月26 日 00:38:34 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:34 INFO     302  Send 0000
+Socket Logging 2016 6月26 日 00:38:34 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:34 INFO     283  Received From client : 0000o 
+Socket Logging 2016 6月26 日 00:38:34 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:34 INFO     296  All Received hello
+Socket Logging 2016 6月26 日 00:38:35 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:35 INFO     302  Send 0001
+Socket Logging 2016 6月26 日 00:38:35 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:35 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:35 INFO     283  Received From client : 0001  
+Socket Logging 2016 6月26 日 00:38:35 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:35 INFO     296  All Received hello 
+Socket Logging 2016 6月26 日 00:38:35 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:35 INFO     302  Send 0010
+Socket Logging 2016 6月26 日 00:38:35 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:35 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:35 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:35 INFO     283  Received From client : 0001  
+Socket Logging 2016 6月26 日 00:38:35 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:36 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:36 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:36 INFO     327  Send 0010
+Socket Logging 2016 6月26 日 00:38:36 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:36 INFO     283  Received From client : 0000o 
+Socket Logging 2016 6月26 日 00:38:36 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:36 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:36 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:36 INFO     327  Send 0010
+Socket Logging 2016 6月26 日 00:38:36 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:36 INFO     283  Received From client : 0010w 
+Socket Logging 2016 6月26 日 00:38:36 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:36 INFO     296  All Received hello w
+Socket Logging 2016 6月26 日 00:38:36 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:36 INFO     302  Send 0011
+Socket Logging 2016 6月26 日 00:38:36 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:36 INFO     283  Received From client : 0011o 
+Socket Logging 2016 6月26 日 00:38:36 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:37 INFO     296  All Received hello wo
+Socket Logging 2016 6月26 日 00:38:37 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:37 INFO     302  Send 0000
+Socket Logging 2016 6月26 日 00:38:37 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:37 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:37 INFO     283  Received From client : 0011o 
+Socket Logging 2016 6月26 日 00:38:37 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:37 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:37 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:37 INFO     327  Send 0000
+Socket Logging 2016 6月26 日 00:38:37 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:37 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:37 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:37 INFO     283  Received From client : 0001l 
+Socket Logging 2016 6月26 日 00:38:37 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:38 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:38 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:38 INFO     327  Send 0000
+Socket Logging 2016 6月26 日 00:38:38 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:38 INFO     283  Received From client : 0000r 
+Socket Logging 2016 6月26 日 00:38:38 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:38 INFO     296  All Received hello wor
+Socket Logging 2016 6月26 日 00:38:38 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:38 INFO     302  Send 0001
+Socket Logging 2016 6月26 日 00:38:38 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:38 INFO     283  Received From client : 0010w 
+Socket Logging 2016 6月26 日 00:38:38 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:38 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:38 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:38 INFO     327  Send 0001
+Socket Logging 2016 6月26 日 00:38:38 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:38 INFO     283  Received From client : 0010d 
+Socket Logging 2016 6月26 日 00:38:38 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:39 INFO     321  This One Is Wrong Delete It
+Socket Logging 2016 6月26 日 00:38:39 INFO     324  Received Ack Is Wrong , Ask For Right Next
+Socket Logging 2016 6月26 日 00:38:39 INFO     327  Send 0001
+Socket Logging 2016 6月26 日 00:38:39 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:39 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:39 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:39 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:39 INFO     283  Received From client : 0001l 
+Socket Logging 2016 6月26 日 00:38:39 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:39 INFO     296  All Received hello worl
+Socket Logging 2016 6月26 日 00:38:39 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:39 INFO     302  Send 0010
+Socket Logging 2016 6月26 日 00:38:39 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:39 INFO     283  Received From client : 0010d 
+Socket Logging 2016 6月26 日 00:38:39 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:40 INFO     296  All Received hello world
+Socket Logging 2016 6月26 日 00:38:40 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:40 INFO     302  Send 0011
+Socket Logging 2016 6月26 日 00:38:40 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:40 INFO     283  Received From client : 0011! 
+Socket Logging 2016 6月26 日 00:38:40 INFO     288  Received One More
+Socket Logging 2016 6月26 日 00:38:40 INFO     296  All Received hello world!
+Socket Logging 2016 6月26 日 00:38:41 INFO     300  Received Right Data , Ask For Next
+Socket Logging 2016 6月26 日 00:38:41 INFO     302  Send 0000
+Socket Logging 2016 6月26 日 00:38:41 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:41 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:41 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:41 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:41 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:41 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:48 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:48 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:48 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:48 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:48 INFO     275  One Sock Can Be Read Or Write
+Socket Logging 2016 6月26 日 00:38:48 INFO     332  Close Sock Success
+Socket Logging 2016 6月26 日 00:38:50 INFO     269  One Client Connect
+Socket Logging 2016 6月26 日 00:38:50 INFO     360  failed[Errno 22] 无效的参数
+Socket Logging 2016 6月26 日 00:38:50 INFO     361  message

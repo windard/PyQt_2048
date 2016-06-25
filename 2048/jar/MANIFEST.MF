@@ -1,0 +1,4 @@
+Manifest-Version: 1.0  
+Created-By: Windard Yang
+Class-Path: .  
+Main-Class: java2048Game
