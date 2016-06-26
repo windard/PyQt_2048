@@ -47,7 +47,7 @@ logger.addHandler(duck_handler)
 logger.setLevel(logging.DEBUG)
 
 class MainClient(QtGui.QWidget):
-    """docstring for MainClient"""
+    """MainClient"""
     def __init__(self):
         super(MainClient, self).__init__()
         self.boxSize = 1
@@ -136,19 +136,6 @@ class MainClient(QtGui.QWidget):
         for x in xrange(0,self.infoLength):
             painter.drawRect(45+20*x,60,15,15)
 
-        # Draw Sended Data
-        # if self.sendNext:
-        #     painter.setBrush(QtGui.QColor(0,255,0))
-        #     painter.drawRect(45+20*self.hasSend,60,15,15)
-
-        # if self.receiveAck:
-        #     painter.setBrush(QtGui.QColor(0,0,255))
-        #     painter.drawRect(45+20*(self.receiveAck),60,15,15)
-
-        # if self.receiveNext:
-        #     painter.setBrush(QtGui.QColor(0,0,255))
-        #     painter.drawRect(45+20*(self.hasReveive-1),60,15,15)
-
         # Draw Data
         painter.setPen(QtGui.QColor(0,0,0))
         painter.setBrush(QtGui.QBrush(QtGui.QColor(255,255,0)))
@@ -175,13 +162,6 @@ class MainClient(QtGui.QWidget):
         painter.setPen(QtGui.QColor(0,0,0))
         painter.setFont(QtGui.QFont("Arial",12))
         painter.drawText(60,180,"All Received : "+self.information)
-        # painter.setPen(QtGui.QColor(0,0,0))
-        # painter.setBrush(QtGui.QColor(0,255,0))
-        # painter.drawRect(45,160,15,15)
-        # painter.drawText(80,175,"Send Request")
-        # painter.setBrush(QtGui.QColor(0,0,255))
-        # painter.drawRect(45,190,15,15)
-        # painter.drawText(80,205,"Receive Request")
 
     def getBoxMaxNum(self):
         self.sendThread = self.boxSize
@@ -204,9 +184,6 @@ class MainClient(QtGui.QWidget):
         else:
             self.hasStart = False
             self.transmitClient.s.shutdown(socket.SHUT_RDWR)
-            # self.transmitClient.s.close()
-            # del self.transmitClient.s
-            # self.transmitClient.s.close()
 
     def refuse(self):
         if not self.stopFlag:
@@ -215,16 +192,12 @@ class MainClient(QtGui.QWidget):
             self.stopFlag = False
             t = threading.Thread(target=startAgain,args=((self.transmitClient,)))
             t.start()
-            # self.transmitClient.run()
-        # self.start()
-        # pass
 
     def throw(self):
         if not self.throwFlag:
             self.throwFlag = True
         else:
             self.throwFlag = False
-        # pass
 
     def closeEvent(self, event):
         reply = QtGui.QMessageBox.question(self, 'Message',
@@ -240,7 +213,7 @@ def startAgain(transmitClient):
     transmitClient.run()
 
 class TransmitClient(threading.Thread):
-    """docstring for TransmitClient"""
+    """TransmitClient"""
     def __init__(self,gui):
         super(TransmitClient, self).__init__()
         self.gui = gui
@@ -249,7 +222,6 @@ class TransmitClient(threading.Thread):
         self.s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
         self.s.bind((self.gui.host,self.gui.port))
         self.s.listen(100)
-        # self.s.settimeout(5)
 
     def run(self):
         logger.info("Socket Is Start %s:%d ... "%(self.gui.host,self.gui.port))
@@ -272,22 +244,18 @@ class TransmitClient(threading.Thread):
                         inputs.append(clientsock)
                         outputs.append(clientsock)
                     else:
-                        logger.info("One Sock Can Be Read Or Write")
                         self.gui.update()
-                        # while 1:
                         try:
                             if self.gui.stopFlag:
                                 break
                             receiveData = sock.recv(1024)
                             if receiveData :
                                 logger.info("Received From client : %s "%receiveData)
-                                # self.gui.update()
                                 self.gui.hasReveive += 1
                                 self.gui.receiveNext = True
                                 self.gui.update()
                                 logger.info("Received One More")
                                 time.sleep(0.2)
-                                # self.gui.update()
                                 if (int(receiveData[:4],2))%self.gui.boxMaxNum == self.gui.sn:
                                     if not self.gui.throwFlag:
                                         sendData = (int(receiveData[:4],2)+1)%self.gui.boxMaxNum
@@ -295,19 +263,13 @@ class TransmitClient(threading.Thread):
                                         self.gui.information += receiveData[-1:]
                                         logger.info("All Received %s"%self.gui.information)
                                         self.gui.update()
-                                        time.sleep(0.5)
-                                        # self.
+                                        time.sleep(1)
                                         logger.info("Received Right Data , Ask For Next")
                                         sock.sendall("%04d" %int(bin(sendData)[2:]))
                                         logger.info("Send %04d" %int(bin(sendData)[2:]))
                                         self.gui.update()
-                                        # self.gui.sendAck += 1
-                                        # self.gui.update()
-                                        # time.sleep(1)
                                         with self.gui.locker:
                                             self.gui.sn = (self.gui.sn+1)%self.gui.boxMaxNum
-                                        # self.gui.update()
-                                        # time.sleep(1)
                                     else:
                                         self.gui.hasReveive -= 1
                                         self.gui.receiveNext = False
@@ -333,7 +295,6 @@ class TransmitClient(threading.Thread):
                                     self.gui.update()
                                     break
                                 except Exception,e:
-                                    logger.info("客户端结束socket之后，服务器端怎样结束这个socket")
                                     logger.info("failed"+str(e))
                                     logger.info("message"+e.message)
                                     self.gui.update()
@@ -348,7 +309,6 @@ class TransmitClient(threading.Thread):
                             else:
                                 logger.error("Clients Error"+str(e))
                                 self.gui.update()
-                                # sys.exit(0)
                                 break
             except KeyboardInterrupt:
                 logger.warning("KeyBoard Stop Server")
