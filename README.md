@@ -1,6 +1,6 @@
-#This is 2048 Game by PyQt4
+# PyQt4 做的一些小玩意儿
 
-这是基于PyQt4和python2.7写的2048小游戏
+## 基于 PyQt4 和 python2.7 写的2048小游戏
 
 实现的功能：
 
@@ -29,7 +29,7 @@ Ubuntu:
 ![2048Game](2048/2048Game.png)
 
 
-基于PyQt4和Python2.7的贪吃蛇小游戏
+## 基于 PyQt4 和 Python2.7 的贪吃蛇小游戏
 
 实现的功能：
 
@@ -48,11 +48,11 @@ Ubuntu：
 
 ![Greed Snake](greedSnake/Greed Snake.png)
 
-基于java1.8 和swing的2048小游戏
+## 基于 java1.8 和 swing 的2048小游戏
 
 实现的功能：
 
-1. 按Escape键重新开始
+1. 按 Esc 键重新开始
 
 游戏截图：
 
@@ -63,3 +63,55 @@ Windows：
 Ubuntu：
 
 ![2048Game_JAVA](2048/2048Game_JAVA.png)
+
+## 基于 PyQt4 和 Python 2.7 的计算机网络回退 N 帧 ARQ 协议
+
+回退 N 帧 ARQ (Automatic Repeat reQues ，自动重传请求) 协议，发送端不需要接收到上一个数据包的 ACK 后才发下一个数据包，而是可以连续发送一定数量的数据包，若在一定时间内未收到返回的 ACK 或收到错误的 ACK ，则将这一定数量的数据包全部重发。
+
+回退 N 帧协议也是属于滑动窗口协议，发送房的滑动窗口大小为 N ，接收方的滑动窗口为 1 。
+
+停等协议即滑动窗口大小为 1 的 回退 N 帧协议
+
+实现的功能：
+
+1. 可以改变发送信息
+
+2. 可以改变窗口大小
+
+运行截图：
+
+Windows：
+
+服务器端 ：
+
+![Server_running_windows](Network/Server_running_windows.png)
+
+![Server_running_windows_2](Network/Server_running_windows_2.png)
+
+![Server_running_windows_3](Network/Server_running_windows_3.png)
+
+客户端：
+
+![Client_running_windows](Network/Client_running_windows.png)
+
+![Client_running_windows_2](Network/Client_running_windows_2.png)
+
+![Client_running_windows_3](Network/Client_running_windows_3.png)
+
+Ubuntu：
+
+服务器端：
+
+![Server_running](Network/Server_running.png)
+
+![Server_running_2](Network/Server_running_2.png)
+
+![Server_running_3](Network/Server_running_3.png)
+
+客户端：
+
+![Client_running](Network/Client_running.png)
+
+![Client_running_2](Network/Client_running_2.png)
+
+![Client_running_3](Network/Client_running_3.png)
