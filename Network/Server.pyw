@@ -74,7 +74,7 @@ class MainServer(QtGui.QWidget):
 
     def initUI(self):
         self.setWindowTitle("Data Communication And NetWork")
-        self.setWindowIcon(QtGui.QIcon("gnome.png"))
+        self.setWindowIcon(QtGui.QIcon("Server.ico"))
         self.setFixedSize(400,400)
         self.center()
 

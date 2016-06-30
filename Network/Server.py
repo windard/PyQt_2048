@@ -74,7 +74,7 @@ class MainServer(QtGui.QWidget):
 
     def initUI(self):
         self.setWindowTitle("Data Communication And NetWork")
-        self.setWindowIcon(QtGui.QIcon("gnome.png"))
+        self.setWindowIcon(QtGui.QIcon("Server.ico"))
         self.setFixedSize(400,400)
         self.center()
 
@@ -193,7 +193,6 @@ class MainServer(QtGui.QWidget):
         text, ok = QtGui.QInputDialog.getText(self, 'Input Information','Input Information (less than 16):')
         if ok:
             if len(text)<1 or len(text)>16:
-                # pass
                 QtGui.QMessageBox.warning(self,'Warning',"<center><b>Warning</b></center> <br>Your Input Is Illegal !")
                 return self.inputInfo()
             else:
